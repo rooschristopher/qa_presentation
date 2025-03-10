@@ -1,0 +1,48 @@
+services:
+  feature-flag-service:
+    hostname: feature-flag-service
+    build:
+      context: ./feature_flags
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - DOWNSTREAM_URL=http://microservice-a:5001/api
+    networks: 
+      - app-network
+  microservice-a:
+    hostname: microservice-a 
+    build:
+      context: ./microservices/a 
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment: 
+      - DOWNSTREAM_URL=http://microservice-b:5002/api
+    networks: 
+      - app-network
+
+  microservice-b:
+    hostname: microservice-b
+    build:
+      context: ./microservices/b 
+      dockerfile: Dockerfile
+    ports: 
+      - "5002:5002"
+    environment: 
+      - DOWNSTREAM_URL=http://microservice-c:5003/api
+    networks: 
+      - app-network
+  microservices-c:
+    hostname: microservice-c
+    build:
+      context: ./microservices/c 
+      dockerfile: Dockerfile
+    ports: 
+      - "5003:5003"
+    networks: 
+      - app-network
+networks: 
+  app-network: 
+    driver: bridge
+
