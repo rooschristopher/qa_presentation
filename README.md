@@ -1,7 +1,3 @@
-Below is a `README.md` for your project, tailored to the current implementation with `feature-flag-service` and the three microservices (`microservice-a`, `microservice-b`, `microservice-c`). It includes an overview, setup instructions, feature flag logic explanation, API endpoints, example `curl` commands, and notes on the architecture.
-
----
-
 # Feature Flag Service Project
 
 ## Overview
